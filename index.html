@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MB PDF Extractor</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>MB PDF Extractor</h1>
+
+        <p class="subtitle">
+            Upload a Defence PO PDF. This tool will extract Order No, PO Line, Part Number, NSN, Description, Quantity and Delivery Date.
+        </p>
+
+        <div class="upload-box">
+            <input type="file" id="pdfFile" accept=".pdf">
+
+            <button onclick="extractData()">
+                Extract Data
+            </button>
+
+            <button onclick="downloadExcel()">
+                Download Excel
+            </button>
+        </div>
+
+        <div class="summary" id="summaryText">
+            No PDF selected yet.
+        </div>
+
+        <table id="resultTable">
+            <thead>
+                <tr>
+                    <th>PO Number</th>
+                    <th>PO Line</th>
+                    <th>Part Number</th>
+                    <th>NSN</th>
+                    <th>Description</th>
+                    <th>Qty</th>
+                    <th>EDD</th>
+                    <th>Source PDF</th>
+                </tr>
+            </thead>
+
+            <tbody>
+            </tbody>
+        </table>
+
+    </div>
+
+    <!-- PDF.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+    <!-- SheetJS Excel library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <!-- Your JavaScript file -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
