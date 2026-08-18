@@ -77,7 +77,7 @@ function extractItems(text, poNumber, fileName) {
     const rows = [];
 
     const itemPattern =
-        /(\d+)\s+Material:\s*(12\d+)\s+(.+?)\s+(\d{2}\/\d{2}\/\d{4})\s+([\d,]+)\s+EA/gi;
+        /(\d+)\s+Material:\s*(12\d+)\s+(.+?)\s+(\d{2}\/\d{2}\/\d{4})\s+([\d,]+)\s+EA\s+[\d,.]+\s+[\d,.]+\s+([\d,.]+)\s+AUD/gi;
 
     let itemMatches = [];
     let itemMatch;
@@ -90,8 +90,10 @@ function extractItems(text, poNumber, fileName) {
             description: cleanText(itemMatch[3]),
             deliveryDate: itemMatch[4],
             quantity: itemMatch[5].replace(/,/g, ""),
+            coaValue: itemMatch[6],
             index: itemMatch.index
         });
+
     }
 
     const manufacturerPattern =
@@ -107,23 +109,27 @@ function extractItems(text, poNumber, fileName) {
             partNumber: cleanPartNumber(manufacturerMatch[2]),
             index: manufacturerMatch.index
         });
+
     }
 
     for (let i = 0; i < itemMatches.length; i++) {
 
         const item = itemMatches[i];
 
-        const matchingManufacturer = manufacturerMatches.find(m =>
-            m.nsn === item.nsnFromMaterial
+        const matchingManufacturer = manufacturerMatches.find(
+            m => m.nsn === item.nsnFromMaterial
         );
 
         rows.push({
             "PO Number": poNumber,
             "PO Line": item.itemNo,
-            "Part Number": matchingManufacturer ? matchingManufacturer.partNumber : "",
+            "Part Number": matchingManufacturer
+                ? matchingManufacturer.partNumber
+                : "",
             "NSN": item.nsnFromMaterial,
             "Description": item.description,
             "Qty": item.quantity,
+            "CoA $": item.coaValue,
             "EDD": item.deliveryDate,
             "Source PDF": fileName
         });
@@ -172,6 +178,7 @@ function displayTable(data) {
             <td>${row["NSN"]}</td>
             <td>${row["Description"]}</td>
             <td>${row["Qty"]}</td>
+            <td>${row["CoA $"]}</td>
             <td>${row["EDD"]}</td>
             <td>${row["Source PDF"]}</td>
         `;
@@ -199,6 +206,7 @@ function downloadExcel() {
         "Description": row["Description"],
         "Qty": row["Qty"],
         "NSN": row["NSN"],
+        "CoA $": row["CoA $"],
         "EDD": row["EDD"],
         "Source PDF": row["Source PDF"]
     }));
