@@ -1,35 +1,127 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
+    margin: 0;
+    padding: 40px 20px;
     font-family: Arial, sans-serif;
+    color: #17212b;
     background: #f4f4f4;
-    padding: 40px;
 }
 
 .container {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
-    width: 900px;
-    margin: auto;
+    width: min(1380px, 100%);
+    margin: 0 auto;
+    padding: 30px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
 }
 
 h1 {
-    color: #003366;
+    margin: 0 0 14px;
+    color: #003b70;
+}
+
+.subtitle {
+    margin: 0 0 24px;
+    line-height: 1.45;
+}
+
+.upload-box {
+    display: grid;
+    gap: 14px;
+    padding: 18px;
+    border: 1px solid #d6dce2;
+    border-radius: 8px;
+    background: #fafbfc;
+}
+
+.file-label {
+    font-weight: 700;
+}
+
+input[type="file"] {
+    max-width: 100%;
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 button {
-    padding: 10px 20px;
-    margin-top: 10px;
+    padding: 11px 20px;
+    border: 1px solid #003b70;
+    border-radius: 6px;
+    color: #fff;
+    background: #003b70;
+    font-size: 15px;
     cursor: pointer;
+}
+
+button.secondary {
+    color: #003b70;
+    background: #fff;
+}
+
+button:disabled {
+    border-color: #aeb7c0;
+    background: #aeb7c0;
+    cursor: not-allowed;
+}
+
+.summary {
+    margin: 18px 0;
+    min-height: 24px;
+    font-weight: 600;
+}
+
+.summary.error {
+    color: #a00000;
+}
+
+.table-wrapper {
+    overflow-x: auto;
 }
 
 table {
     width: 100%;
-    margin-top: 20px;
+    min-width: 1100px;
     border-collapse: collapse;
 }
 
-table th,
-table td {
-    border: 1px solid #ccc;
+th,
+td {
     padding: 10px;
+    border: 1px solid #ccd2d8;
+    text-align: left;
+    vertical-align: top;
+}
+
+th {
+    position: sticky;
+    top: 0;
+    color: #fff;
+    background: #003b70;
+}
+
+tbody tr:nth-child(even) {
+    background: #f7f9fb;
+}
+
+@media (max-width: 700px) {
+    body {
+        padding: 16px 8px;
+    }
+
+    .container {
+        padding: 18px;
+    }
+
+    button {
+        width: 100%;
+    }
 }
