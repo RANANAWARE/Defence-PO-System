@@ -174,7 +174,7 @@ function extractItems(text, poNumber, fileName) {
             "NSN": nsn,
             "Description": header.description,
             "Qty": header.quantity,
-            "CoA $": header.itemTotal,
+            "CoA $": header.unitPrice,
             "EDD": header.deliveryDate,
             "Source PDF": fileName
         });
